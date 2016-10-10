@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+    <script type="text/javascript" src="/javascript/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+    <div id="main">
+        <table>
+            <tr>
+                <td>Full name: </td>
+                <td>
+                    <input type="text" id="fullName" placeholder="Enter Full name" /></td>
+            </tr>
+            <tr>
+                <td>Type:</td>
+                <td>
+                    <input type="text" id="type" placeholder="Enter type" /></td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>
+                    <input type="text" id="message" placeholder="Enter Message" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="button" value="Submit" id="btnSubmit" /></td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $('#btnSubmit').click(function () {
+        var data = {
+            fullName: $("#fullName").val(),
+            type: $("#type").val(),
+            message: $("#message").val()
+        }
+
+        $.ajax({
+            url: '/contactus',
+            data: data,
+            error: function () {
+                $('#info').html('<p>An error has occurred</p>');
+            },
+            dataType: 'json',
+            success: function (data) {
+                $("#main").html(data);
+            },
+            type: 'POST'
+        });
+    });
+
+</script>
